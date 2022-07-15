@@ -19,9 +19,9 @@ export const ListItem:React.FC<Props> = ({content, complete = false, ID}: Props)
     
 
     return (
-        <li className={"ListItem" + (isComplete ? " strikethrough" : "")}>
+        <li className={"ListItem" + (isComplete ? " strikethrough" : "")} id={ID.toString()}>
             {content}
-            <CompleteButton ID={ID} onClick={handleComplete}/>
+            <CompleteButton onClick={handleComplete}/>
         </li>
     )
 }
