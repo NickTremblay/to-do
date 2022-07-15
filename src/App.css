@@ -17,3 +17,7 @@
   height: fit-content;
   margin-left: .5em;
 }
+
+.TaskList{
+  list-style: none;
+}
