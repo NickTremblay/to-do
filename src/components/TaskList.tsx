@@ -11,6 +11,12 @@ interface Task {
 export const TaskList:React.FC = () => {
     const [tasks, setTasks] = useState<Task[]>([]);
 
+    const handleDelete = (id: number) => {
+        setTasks(
+            tasks.filter(task => task.ID !== id)
+        );
+    }
+
     const handleNewTask = () =>{
         let content:string = window.prompt("Enter your new task name") || "";
 
@@ -23,7 +29,7 @@ export const TaskList:React.FC = () => {
                 {
                     content, 
                     // ID of new task is ID of last task + 1 or 0 
-                    ID: (tasks.length === 0 ? 0 : tasks[tasks.length].ID + 1)
+                    ID: (tasks.length === 0 ? 0 : tasks[tasks.length - 1].ID + 1)
                 }
             ]
         );
@@ -33,7 +39,7 @@ export const TaskList:React.FC = () => {
         <ul className="TaskList">
             {
                 // Convert each task to ListItem and render
-                tasks.map(task => (<ListItem content={task.content} ID={task.ID} complete={task.complete} />))
+                tasks.map(task => (<ListItem content={task.content} ID={task.ID} complete={task.complete} handleDelete={() => handleDelete(task.ID)} />))
             }
             <NewTaskButton onClick={handleNewTask} />
         </ul>

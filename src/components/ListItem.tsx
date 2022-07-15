@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import {CompleteButton} from './CompleteButton';
+import { DeleteButton } from './DeleteButton';
 import {EditButton} from './EditButton';
 
 interface Props{
     content: string, 
     complete?: boolean,
     ID: number
+    handleDelete: () => void; 
 }
 
-export const ListItem:React.FC<Props> = ({content, complete = false, ID}: Props) =>  {
+export const ListItem:React.FC<Props> = ({content, complete = false, ID, handleDelete}: Props) =>  {
 
     const [isComplete, setComplete] = useState(complete); 
     const [taskContent, setTaskContent] = useState(content);
@@ -33,6 +35,7 @@ export const ListItem:React.FC<Props> = ({content, complete = false, ID}: Props)
             {taskContent}
             <CompleteButton onClick={handleComplete}/>
             <EditButton onClick={handleEdit} />
+            <DeleteButton onClick={handleDelete} />
         </li>
     )
 }
