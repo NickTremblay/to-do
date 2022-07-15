@@ -30,12 +30,22 @@ export const ListItem:React.FC<Props> = ({content, complete = false, ID, handleD
         setTaskContent(newContent);
     }
 
-    return (
-        <li className={"ListItem" + (isComplete ? " strikethrough" : "")} id={ID.toString()}>
-            {taskContent}
-            <CompleteButton onClick={handleComplete}/>
-            <EditButton onClick={handleEdit} />
-            <DeleteButton onClick={handleDelete} />
-        </li>
-    )
+    if(isComplete){
+        return (
+            <li className="ListItem strikethrough" id={ID.toString()}>
+                {taskContent}
+                <EditButton onClick={handleEdit} />
+                <DeleteButton onClick={handleDelete} />
+            </li>
+        )
+    }else{ 
+        return (
+            <li className="ListItem" id={ID.toString()}>
+                {taskContent}
+                <CompleteButton onClick={handleComplete}/>
+                <EditButton onClick={handleEdit} />
+                <DeleteButton onClick={handleDelete} />
+            </li>
+        )
+    }
 }
