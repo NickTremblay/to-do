@@ -23,7 +23,7 @@ export const TaskList:React.FC = () => {
                 {
                     content, 
                     // ID of new task is ID of last task + 1 or 0 
-                    ID: ((tasks[tasks.length - 1].ID) + 1) || 0
+                    ID: (tasks.length === 0 ? 0 : tasks[tasks.length].ID + 1)
                 }
             ]
         );
