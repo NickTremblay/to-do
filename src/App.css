@@ -1,3 +1,19 @@
 .App {
   text-align: center;
 }
+
+
+.ListItem {
+  font-size: 1em;
+  display: flexbox;
+  width: 80%;
+}
+
+.strikethrough {
+  text-decoration: line-through;
+}
+
+.CompleteButton{
+  height: fit-content;
+  margin-left: .5em;
+}
