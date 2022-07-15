@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  align-content: center;
 }
 
 
@@ -20,4 +21,12 @@
 
 .TaskList{
   list-style: none;
+  padding-left: 0;
+  width: 100%;
+}
+
+.NewTaskButton{
+  height: fit-content;
+  width: 50%;
+  margin-top: .5em;
 }

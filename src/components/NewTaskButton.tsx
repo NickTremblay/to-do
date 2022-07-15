@@ -5,6 +5,6 @@ interface Props{
     onClick: () => void; 
 }
 
-export const NewTaskButton:React.FC<Props> = ({onClick}) =>  {
-    return  <button className="Button" onClick={onClick}><AiOutlinePlusCircle /></button>;
+export const NewTaskButton:React.FC<Props> = ({onClick}) => {
+    return  <li><button className="NewTaskButton" onClick={onClick}><AiOutlinePlusCircle /></button></li>;
 }
