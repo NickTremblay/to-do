@@ -6,5 +6,5 @@ interface Props{
 }
 
 export const CompleteButton:React.FC<Props> = ({onClick}) =>  {
-    return  <button className="CompleteButton" onClick={onClick}><AiOutlineCheck /></button>;
+    return  <button className="Button" onClick={onClick}><AiOutlineCheck /></button>;
 }
