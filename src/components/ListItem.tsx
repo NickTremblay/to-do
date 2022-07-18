@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import {CompleteButton} from './CompleteButton';
-import { DeleteButton } from './DeleteButton';
-import {EditButton} from './EditButton';
+import {Button} from './Button';
 
 interface Props{
     content: string, 
@@ -10,7 +8,7 @@ interface Props{
     handleDelete: () => void; 
 }
 
-export const ListItem:React.FC<Props> = ({content, complete = false, key, handleDelete}: Props) =>  {
+export const ListItem:React.FC<Props> = ({content, complete = false, handleDelete}: Props) =>  {
 
     const [isComplete, setComplete] = useState(complete); 
     const [taskContent, setTaskContent] = useState(content);
@@ -30,22 +28,12 @@ export const ListItem:React.FC<Props> = ({content, complete = false, key, handle
         setTaskContent(newContent);
     }
 
-    if(isComplete){
-        return (
-            <li className="ListItem strikethrough">
-                {taskContent}
-                <EditButton onClick={handleEdit} />
-                <DeleteButton onClick={handleDelete} />
-            </li>
-        )
-    }else{ 
-        return (
-            <li className="ListItem">
-                {taskContent}
-                <CompleteButton onClick={handleComplete}/>
-                <EditButton onClick={handleEdit} />
-                <DeleteButton onClick={handleDelete} />
-            </li>
-        )
-    }
+    return (
+        <li className={"ListItem" + (isComplete ? " strikethrough" : "")}>
+            {taskContent}
+            <Button onClick={handleComplete} icon={isComplete ? "undo" : "complete"} />
+            <Button onClick={handleEdit} icon="edit" />
+            <Button onClick={handleDelete} icon="delete" />
+        </li>
+    );
 }
