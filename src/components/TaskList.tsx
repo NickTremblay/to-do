@@ -39,7 +39,7 @@ export const TaskList:React.FC = () => {
         <ul className="TaskList">
             {
                 // Convert each task to ListItem and render
-                tasks.map(task => (<ListItem content={task.content} ID={task.ID} complete={task.complete} handleDelete={() => handleDelete(task.ID)} />))
+                tasks.map(task => (<ListItem content={task.content} key={task.ID} complete={task.complete} handleDelete={() => handleDelete(task.ID)} />))
             }
             <NewTaskButton onClick={handleNewTask} />
         </ul>

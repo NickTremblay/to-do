@@ -6,11 +6,11 @@ import {EditButton} from './EditButton';
 interface Props{
     content: string, 
     complete?: boolean,
-    ID: number
+    key: number
     handleDelete: () => void; 
 }
 
-export const ListItem:React.FC<Props> = ({content, complete = false, ID, handleDelete}: Props) =>  {
+export const ListItem:React.FC<Props> = ({content, complete = false, key, handleDelete}: Props) =>  {
 
     const [isComplete, setComplete] = useState(complete); 
     const [taskContent, setTaskContent] = useState(content);
@@ -32,7 +32,7 @@ export const ListItem:React.FC<Props> = ({content, complete = false, ID, handleD
 
     if(isComplete){
         return (
-            <li className="ListItem strikethrough" id={ID.toString()}>
+            <li className="ListItem strikethrough">
                 {taskContent}
                 <EditButton onClick={handleEdit} />
                 <DeleteButton onClick={handleDelete} />
@@ -40,7 +40,7 @@ export const ListItem:React.FC<Props> = ({content, complete = false, ID, handleD
         )
     }else{ 
         return (
-            <li className="ListItem" id={ID.toString()}>
+            <li className="ListItem">
                 {taskContent}
                 <CompleteButton onClick={handleComplete}/>
                 <EditButton onClick={handleEdit} />
