@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {ListItem} from './ListItem';
-import {Button} from './Button';
+import {Button, iconName} from './Button';
 
 interface Task {
     content: string, 
@@ -41,7 +41,7 @@ export const TaskList:React.FC = () => {
                 // Convert each task to ListItem and render
                 tasks.map(task => (<ListItem content={task.content} key={task.ID} complete={task.complete} handleDelete={() => handleDelete(task.ID)} />))
             }
-            <Button icon='add' className="NewTaskButton" onClick={handleNewTask} />
+            <Button icon={iconName.add} className="NewTaskButton" onClick={handleNewTask} />
         </ul>
     )
 }

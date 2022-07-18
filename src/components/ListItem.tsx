@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Button} from './Button';
+import {Button, iconName} from './Button';
 
 interface Props{
     content: string, 
@@ -31,9 +31,9 @@ export const ListItem:React.FC<Props> = ({content, complete = false, handleDelet
     return (
         <li className={"ListItem" + (isComplete ? " strikethrough" : "")}>
             {taskContent}
-            <Button onClick={handleComplete} icon={isComplete ? "undo" : "complete"} />
-            <Button onClick={handleEdit} icon="edit" />
-            <Button onClick={handleDelete} icon="delete" />
+            <Button onClick={handleComplete} icon={isComplete ? iconName.undo : iconName.complete} />
+            <Button onClick={handleEdit} icon={iconName.edit} />
+            <Button onClick={handleDelete} icon={iconName.delete} />
         </li>
     );
 }

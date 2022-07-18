@@ -2,9 +2,17 @@ import React from "react";
 import {AiFillDelete, AiOutlineCheck, AiFillEdit, AiOutlinePlusCircle} from "react-icons/ai";
 import {BiUndo} from "react-icons/bi";
 
+export enum iconName{
+    delete = "delete", 
+    complete = "complete",
+    edit = "edit",
+    add = "add",
+    undo = "undo"
+}
+
 interface Props{
     onClick: () => void; 
-    icon: "delete" | "complete" | "edit" | "add" | "undo";
+    icon: iconName;
     className?: string; 
 }
 
