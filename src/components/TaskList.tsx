@@ -1,12 +1,7 @@
 import React, { useState } from 'react';
 import {ListItem} from './ListItem';
 import {Button, iconName} from './Button';
-
-interface Task {
-    content: string, 
-    complete?: boolean,
-    ID: number
-}
+import Task from '../types/Task';
 
 export const TaskList:React.FC = () => {
     const [tasks, setTasks] = useState<Task[]>([]);
