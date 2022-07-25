@@ -6,6 +6,7 @@ import User from '../types/User';
 import { useMutation, useQuery } from '@apollo/client';
 import GET_TASKS from '../gql/getTasks';
 import ADD_TASK from '../gql/addTask';
+import DELETE_TASK from '../gql/deleteTask';
 
 export const TaskList:React.FC<{user:User}> = ({user}) => {
     // Init hook to query all tasks owned by user 
@@ -23,12 +24,27 @@ export const TaskList:React.FC<{user:User}> = ({user}) => {
         ]
     })
 
-    if(loading || taskSubmission.loading) return <p>Loading...</p>;
+    // Init hook to delete tasks
+    const [deleteTask, taskDeletion] = useMutation(DELETE_TASK, {
+        refetchQueries: [
+            {
+                query: GET_TASKS,
+                variables: {owner: user.id}
+            }
+        ]
+    });
+
+    if(loading || taskSubmission.loading || taskDeletion.loading) return <p>Loading...</p>;
     if(error) throw error;     
     if(taskSubmission.error) throw taskSubmission.error; 
+    if(taskDeletion.error) throw taskDeletion.error; 
 
     const handleDelete = (id: number) => {
-
+        deleteTask({
+            variables:{
+                ID: id
+            }
+        })
     }
 
     const handleNewTask = () =>{
