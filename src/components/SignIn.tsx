@@ -1,6 +1,7 @@
 import React, { useState } from "react"; 
 import User from "../types/User";
 import userExists from "../services/userExists"
+import createUser from "../services/createUser";
 
 interface Props{
     handleSignIn: (u: User) => void; 
@@ -34,8 +35,19 @@ const SignIn:React.FC<Props> =  ({handleSignIn}) =>{
         handleSignIn(user);
     }
 
-    const handleSignUpSubmit = (e:React.SyntheticEvent) => {
+    const handleSignUpSubmit = async(e:React.SyntheticEvent) => {
         e.preventDefault();
+
+        if(inputs.newUsername == "") return alert("Username cannot be blank");
+        if(inputs.displayname == "") return alert("Displayname cannot be blank");
+
+        let u = await userExists(inputs.newUsername);
+        if(u) return alert("Username already exists");
+
+        const user = await createUser(inputs.newUsername, inputs.displayname);
+
+        // Sign in newly created user
+        handleSignIn(user)
     }
 
     return (
