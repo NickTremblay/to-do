@@ -1,6 +1,7 @@
 import { useMutation } from '@apollo/client';
 import React, { useState } from 'react';
 import COMPLETE_TASK from '../gql/completeTask';
+import RENAME_TASK from '../gql/renameTask';
 import {Button, iconName} from './Button';
 
 interface Props{
@@ -16,8 +17,10 @@ export const ListItem:React.FC<Props> = ({content, complete = false, handleDelet
     const [taskContent, setTaskContent] = useState(content);
 
     const [completeTask, taskCompletion] = useMutation(COMPLETE_TASK);
+    const [renameTask, taskRenaming] = useMutation(RENAME_TASK);
 
     if(taskCompletion.error) throw taskCompletion.error; 
+    if(taskRenaming.error) throw taskRenaming.error; 
 
     const handleComplete = () => {
         // Toggle complete status in state 
@@ -38,6 +41,12 @@ export const ListItem:React.FC<Props> = ({content, complete = false, handleDelet
         if(newContent === "" || newContent === taskContent) return;
 
         setTaskContent(newContent);
+        renameTask({
+            variables: {
+                ID, 
+                content: newContent
+            }
+        });
     }
 
     return (
