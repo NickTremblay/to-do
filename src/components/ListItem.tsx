@@ -24,13 +24,13 @@ export const ListItem:React.FC<Props> = ({content, complete = false, handleDelet
 
     const handleComplete = () => {
         // Toggle complete status in state 
-        setComplete(!isComplete);
         completeTask({
             variables: {
                 ID,
-                complete: isComplete
+                complete: !isComplete
             }
         })
+        setComplete(!isComplete);
     }
 
     const handleEdit = () => {
