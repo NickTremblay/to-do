@@ -65,7 +65,7 @@ export const TaskList:React.FC<{user:User}> = ({user}) => {
         <ul className="TaskList">
             {
                 // Convert each task to ListItem and render
-                data ? data.todo_task.map(task => (<ListItem content={task.content} key={task.ID} complete={task.complete} handleDelete={() => handleDelete(task.ID)} />)) : ""
+                data ? data.todo_task.map(task => (<ListItem content={task.content} key={task.ID} ID={task.ID} complete={task.complete} handleDelete={() => handleDelete(task.ID)} />)) : ""
             }
             <Button icon={iconName.add} className="NewTaskButton" onClick={handleNewTask} />
         </ul>

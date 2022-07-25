@@ -1,21 +1,33 @@
+import { useMutation } from '@apollo/client';
 import React, { useState } from 'react';
+import COMPLETE_TASK from '../gql/completeTask';
 import {Button, iconName} from './Button';
 
 interface Props{
     content: string, 
     complete?: boolean,
-    key: number
+    ID: number
     handleDelete: () => void; 
 }
 
-export const ListItem:React.FC<Props> = ({content, complete = false, handleDelete}: Props) =>  {
+export const ListItem:React.FC<Props> = ({content, complete = false, handleDelete, ID}: Props) =>  {
 
     const [isComplete, setComplete] = useState(complete); 
     const [taskContent, setTaskContent] = useState(content);
 
+    const [completeTask, taskCompletion] = useMutation(COMPLETE_TASK);
+
+    if(taskCompletion.error) throw taskCompletion.error; 
+
     const handleComplete = () => {
         // Toggle complete status in state 
         setComplete(!isComplete);
+        completeTask({
+            variables: {
+                ID,
+                complete: isComplete
+            }
+        })
     }
 
     const handleEdit = () => {
