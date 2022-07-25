@@ -26,7 +26,7 @@ function App() {
   return (
       <div className="App">
         <h1>{user.displayname}'s To Do:</h1>
-        <TaskList />
+        <TaskList user={user} />
       </div>
   );
 }

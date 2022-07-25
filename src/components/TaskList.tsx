@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import {ListItem} from './ListItem';
 import {Button, iconName} from './Button';
 import Task from '../types/Task';
+import User from '../types/User';
 
-export const TaskList:React.FC = () => {
+export const TaskList:React.FC<{user:User}> = ({user}) => {
     const [tasks, setTasks] = useState<Task[]>([]);
 
     const handleDelete = (id: number) => {
