@@ -3,14 +3,20 @@ import {ListItem} from './ListItem';
 import {Button, iconName} from './Button';
 import Task from '../types/Task';
 import User from '../types/User';
+import { useQuery } from '@apollo/client';
+import GET_TASKS from '../gql/getTasks';
 
 export const TaskList:React.FC<{user:User}> = ({user}) => {
-    const [tasks, setTasks] = useState<Task[]>([]);
+    // Init hook to query all tasks owned by user 
+    const {loading, error, data} = useQuery<{todo_task: Task[]}, {owner:number}>(GET_TASKS, {
+        variables: {owner: user.id}
+    })
+
+    if(loading) return <p>Loading...</p>;
+    if(error) throw error;     
 
     const handleDelete = (id: number) => {
-        setTasks(
-            tasks.filter(task => task.ID !== id)
-        );
+
     }
 
     const handleNewTask = () =>{
@@ -19,23 +25,14 @@ export const TaskList:React.FC<{user:User}> = ({user}) => {
         // Override state update and terminate if no content
         if(!content || content === "") return;
 
-        setTasks(
-            [
-                ...tasks,
-                {
-                    content, 
-                    // ID of new task is ID of last task + 1 or 0 
-                    ID: (tasks.length === 0 ? 0 : tasks[tasks.length - 1].ID + 1)
-                }
-            ]
-        );
+        
     }
 
     return (
         <ul className="TaskList">
             {
                 // Convert each task to ListItem and render
-                tasks.map(task => (<ListItem content={task.content} key={task.ID} complete={task.complete} handleDelete={() => handleDelete(task.ID)} />))
+                data ? data.todo_task.map(task => (<ListItem content={task.content} key={task.ID} complete={task.complete} handleDelete={() => handleDelete(task.ID)} />)) : ""
             }
             <Button icon={iconName.add} className="NewTaskButton" onClick={handleNewTask} />
         </ul>
