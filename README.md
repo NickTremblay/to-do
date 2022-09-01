@@ -3,9 +3,6 @@
 ## Description 
 Simple to-do list web application built using react. Personal training project and portfolio code.
 
-## To Do
-Implement persistence layer using apollo client, hasura api, and postgres. Front end hooks/types will be auto-generated using apollo codegen.
-
 ## Scripts
 
 In the project directory, you can run:
